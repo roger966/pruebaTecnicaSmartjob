@@ -56,7 +56,7 @@ public class UsuarioServiceTest {
 	@Test
 	public void testFallidoPorFaltaDeDatos() {
 		UsuarioDTO usuario = new UsuarioDTO();
-		usuario.setNombre("");
+		usuario.setName("");
 		ResponseEntity<String> exception = usuarioService.registrarUsuario(usuario);
         usuarioService.registrarUsuario(usuario);
 		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
@@ -70,16 +70,14 @@ public class UsuarioServiceTest {
 	@Test
 	public void testGuardar() {
 		UsuarioDTO usuario = new UsuarioDTO();
-		usuario.setNombre("Roger");
-		usuario.setCorreo("roger@gmail.com");
-		usuario.setContrasena("1Qp#");
-		usuario.setCreated(new Date());
+		usuario.setName("Roger");
+		usuario.setEmail("roger@gmail.com");
+		usuario.setPassword("1Qp#");
 		Usuario uEntidad = new Usuario();
 		uEntidad.setActive(true);
-		uEntidad.setNombre(usuario.getNombre());
-		uEntidad.setContraseña(usuario.getContrasena());
-		uEntidad.setCorreo(usuario.getCorreo());
-		uEntidad.setCreated(usuario.getCreated());
+		uEntidad.setName(usuario.getName());
+		uEntidad.setPassword(usuario.getPassword());
+		uEntidad.setEmail(usuario.getEmail());
 		when(usuarioRepository.save(any(Usuario.class))).thenReturn(uEntidad);
 		NivelContrasena nivelContrasena = new NivelContrasena();
 		nivelContrasena.setId(1L);
@@ -99,9 +97,9 @@ public class UsuarioServiceTest {
 	@Test
 	public void testFallidoPorMail() {
 		UsuarioDTO usuario = new UsuarioDTO();
-		usuario.setNombre("Juan");
-		usuario.setCorreo("juanjuan.com");
-		usuario.setContrasena("456asX*");
+		usuario.setName("Juan");
+		usuario.setEmail("juanjuan.com");
+		usuario.setPassword("456asX*");
 		ResponseEntity<String> exception = usuarioService.registrarUsuario(usuario);
         usuarioService.registrarUsuario(usuario);
 		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
@@ -115,16 +113,14 @@ public class UsuarioServiceTest {
 	@Test
 	public void testFallidoModificarPorId() {
 		UsuarioDTO usuario = new UsuarioDTO();
-		usuario.setNombre("Roger");
-		usuario.setCorreo("roger@gmail.com");
-		usuario.setContrasena("1Qp#");
-		usuario.setCreated(new Date());
+		usuario.setName("Roger");
+		usuario.setEmail("roger@gmail.com");
+		usuario.setPassword("1Qp#");
 		Usuario uEntidad = new Usuario();
 		uEntidad.setActive(true);
-		uEntidad.setNombre(usuario.getNombre());
-		uEntidad.setContraseña(usuario.getContrasena());
-		uEntidad.setCorreo(usuario.getCorreo());
-		uEntidad.setCreated(usuario.getCreated());
+		uEntidad.setName(usuario.getName());
+		uEntidad.setPassword(usuario.getPassword());
+		uEntidad.setEmail(usuario.getEmail());
 		when(usuarioRepository.save(any(Usuario.class))).thenReturn(uEntidad);
 		ResponseEntity<String> response = usuarioService.modificarUsuario(usuario);
 		assertEquals("{\"mensaje\": \"No se encontró usuario con ese id\"}", response.getBody());
@@ -162,15 +158,15 @@ public class UsuarioServiceTest {
 	@Test
 	public void testConsultarUsuario() {
 		Usuario usuario = new Usuario();
-		usuario.setNombre("Roger");
-		usuario.setCorreo("roger@gmail.com");
-		usuario.setContraseña("1Qp#");
+		usuario.setName("Roger");
+		usuario.setEmail("roger@gmail.com");
+		usuario.setPassword("1Qp#");
 		usuario.setCreated(new Date());
 		Usuario uEntidad = new Usuario();
 		uEntidad.setActive(true);
-		uEntidad.setNombre(usuario.getNombre());
-		uEntidad.setContraseña(usuario.getContrasena());
-		uEntidad.setCorreo(usuario.getCorreo());
+		uEntidad.setName(usuario.getName());
+		uEntidad.setPassword(usuario.getPassword());
+		uEntidad.setEmail(usuario.getEmail());
 		uEntidad.setCreated(usuario.getCreated());
 		when(usuarioRepository.findAll()).thenReturn(Arrays.asList(usuario));
 		List<Usuario>listaUsuario= usuarioService.consultarUsuarios();

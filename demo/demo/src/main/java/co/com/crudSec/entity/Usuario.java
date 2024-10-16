@@ -36,9 +36,9 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	private boolean isActive = true;
-	private String nombre;
-    private String correo;
-    private String contrasena;
+	private String name;
+    private String email;
+    private String password;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,7 +49,7 @@ public class Usuario {
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
-    private List<Telefono> telefonos;
+    private List<Telefono> phones;
     
     
 	public String getToken() {
@@ -58,11 +58,11 @@ public class Usuario {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public List<Telefono> getTelefonos() {
-		return telefonos;
+	public List<Telefono> getPhones() {
+		return phones;
 	}
-	public void setTelefonos(List<Telefono> telefonos) {
-		this.telefonos = telefonos;
+	public void setPhones(List<Telefono> phones) {
+		this.phones = phones;
 	}
 	public UUID getId() {
 		return id;
@@ -76,23 +76,23 @@ public class Usuario {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getCorreo() {
-		return correo;
+	public String getEmail() {
+		return email;
 	}
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getContrasena() {
-		return contrasena;
+	public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String contrasena) {
-		this.contrasena = contrasena;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Date getCreated() {
 		return created;

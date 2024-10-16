@@ -52,19 +52,19 @@ public class UsuarioService implements IUsuarioService{
      *
      */
     public ResponseEntity<String> registrarUsuario(UsuarioDTO usuario) {
-    	if(usuario.getNombre().isEmpty() || usuario.getCorreo().isEmpty() || usuario.getContrasena().isEmpty()) {
+    	if(usuario.getName().isEmpty() || usuario.getEmail().isEmpty() || usuario.getPassword().isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"No es posible registrar por falta de datos\"}");
 		}
-		if(!validarCorreo(usuario.getCorreo())){
+		if(!validarCorreo(usuario.getEmail())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"El correo no cumple con el formato requerido\"}");
 		}
-		if(!validarPasword(usuario.getContrasena())){
+		if(!validarPasword(usuario.getPassword())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"La contraseña no cumple con el formato requerido\"}");
 		}
-		Optional<Usuario> usuarioCorreo = usuarioRepository.findByCorreo(usuario.getCorreo());
+		Optional<Usuario> usuarioCorreo = usuarioRepository.findByEmail(usuario.getEmail());
 		
 		if(!usuarioCorreo.isEmpty() && usuarioCorreo.get().getId()!= usuario.getId()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -74,7 +74,7 @@ public class UsuarioService implements IUsuarioService{
 		Usuario usuarioEntidad=convertirDtoEntidad(usuario);
 		usuarioEntidad.setCreated(new Date());
 		usuarioEntidad.setModified(new Date());
-		usuarioEntidad.setContraseña(PasswordUtil.encodePassword(usuario.getContrasena()));
+		usuarioEntidad.setPassword(PasswordUtil.encodePassword(usuario.getPassword()));
 		usuarioRepository.save(usuarioEntidad);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body("{\"mensaje\": \"Usuario creado éxitosamente\"}");
@@ -88,32 +88,32 @@ public class UsuarioService implements IUsuarioService{
      */
 	public ResponseEntity<String> modificarUsuario(UsuarioDTO usuario) {
 		Optional<Usuario> usuarioId = usuarioRepository.findById(usuario.getId());
-		Optional<Usuario> usuarioCorreo = usuarioRepository.findByCorreo(usuario.getCorreo());
+		Optional<Usuario> usuarioCorreo = usuarioRepository.findByEmail(usuario.getEmail());
 		if(usuarioId.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"No se encontró usuario con ese id\"}");
 		}
-		if(usuario.getNombre().isEmpty() || usuario.getCorreo().isEmpty() || usuario.getContrasena().isEmpty()) {
+		if(usuario.getName().isEmpty() || usuario.getEmail().isEmpty() || usuario.getPassword().isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"No es posible registrar por falta de datos\"}");
 		}
-		if(!validarCorreo(usuario.getCorreo())){
+		if(!validarCorreo(usuario.getEmail())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"El correo no cumple con el formato requerido\"}");
 		}
-		if(!validarPasword(usuario.getContrasena())){
+		if(!validarPasword(usuario.getPassword())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"La contraseña no cumple con el formato requerido\"}");
 		}
-		if(!usuarioCorreo.isEmpty() && usuarioCorreo.get().getId()!= usuario.getId()) {
+		if(usuarioCorreo.isPresent() && usuarioCorreo.get().getId()!= usuario.getId()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"El correo ya se encuentra registrado\"}");
 		}
 		Usuario usuarioEntidad=convertirDtoEntidad(usuario);
 		usuarioEntidad.setId(usuario.getId());
-		usuarioEntidad.setCreated(usuario.getCreated());
+		usuarioEntidad.setCreated(usuarioId.get().getCreated());
 		usuarioEntidad.setModified(new Date());
-		usuarioEntidad.setContraseña(PasswordUtil.encodePassword(usuario.getContrasena()));
+		usuarioEntidad.setPassword(PasswordUtil.encodePassword(usuario.getPassword()));
 		usuarioRepository.save(usuarioEntidad);
 		return ResponseEntity.status(HttpStatus.OK)
 				.body("{\"mensaje\": \"El usuario ha sido modificado éxitosamente\"}");
@@ -156,14 +156,14 @@ public class UsuarioService implements IUsuarioService{
 	private Usuario convertirDtoEntidad(UsuarioDTO usuario) {
 		Usuario usuarioEntidad = new Usuario();
 		List<Telefono> telefonos = new ArrayList<>();
-		usuarioEntidad.setNombre(usuario.getNombre().trim());
-		usuarioEntidad.setCorreo(usuario.getCorreo().trim());
-		usuarioEntidad.setContraseña(usuario.getContrasena());
+		usuarioEntidad.setName(usuario.getName().trim());
+		usuarioEntidad.setEmail(usuario.getEmail().trim());
+		usuarioEntidad.setPassword(usuario.getPassword());
 		usuarioEntidad.setLastLogin(new Date());
 		usuarioEntidad.setToken(UUID.randomUUID().toString()); 
 		usuarioEntidad.setActive(true);
-	    if (usuario.getTelefonos() != null) {
-	        for (TelefonoDTO telefonoDTO : usuario.getTelefonos()) {
+	    if (usuario.getPhones() != null) {
+	        for (TelefonoDTO telefonoDTO : usuario.getPhones()) {
 	            Telefono telefono = new Telefono();
 	            telefono.setNumber(telefonoDTO.getNumber().trim());
 	            telefono.setCitycode(telefonoDTO.getCitycode().trim());
@@ -171,7 +171,7 @@ public class UsuarioService implements IUsuarioService{
 	            telefonos.add(telefono);
 	        }
 	    }
-		usuarioEntidad.setTelefonos(telefonos);
+		usuarioEntidad.setPhones(telefonos);
 		return usuarioEntidad;
 	}
 

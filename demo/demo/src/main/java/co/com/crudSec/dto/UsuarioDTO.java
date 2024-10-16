@@ -4,7 +4,6 @@
 package co.com.crudSec.dto;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -21,15 +20,10 @@ import lombok.NoArgsConstructor;
 public class UsuarioDTO {
 
 	private UUID id;
-	private boolean isActive;
-	private String nombre;
-    private String correo;
-    private String contrasena;
-    private Date created;
-    private Date modified;
-    private Date lastLogin;
-    private String token;
-    private List<TelefonoDTO> telefonos = new ArrayList<>();
+	private String name;
+    private String email;
+    private String password;
+    private List<TelefonoDTO> phones = new ArrayList<>();
 	/**
 	 * @return the id
 	 */
@@ -42,112 +36,54 @@ public class UsuarioDTO {
 	public void setId(UUID id) {
 		this.id = id;
 	}
+	
 	/**
-	 * @return the isActive
+	 * @return the name
 	 */
-	public boolean isActive() {
-		return isActive;
+	public String getName() {
+		return name;
 	}
 	/**
-	 * @param isActive the isActive to set
+	 * @param name the name to set
 	 */
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
 	}
 	/**
-	 * @return the nombre
+	 * @param email the email to set
 	 */
-	public String getNombre() {
-		return nombre;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
-	 * @param nombre the nombre to set
+	 * @return the password
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getPassword() {
+		return password;
 	}
 	/**
-	 * @return the correo
+	 * @param password the password to set
 	 */
-	public String getCorreo() {
-		return correo;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	/**
-	 * @param correo the correo to set
+	 * @return the phones
 	 */
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public List<TelefonoDTO> getPhones() {
+		return phones;
 	}
 	/**
-	 * @return the contrasena
+	 * @param phones the phones to set
 	 */
-	public String getContrasena() {
-		return contrasena;
-	}
-	/**
-	 * @param contrasena the contrasena to set
-	 */
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
-	/**
-	 * @return the created
-	 */
-	public Date getCreated() {
-		return created;
-	}
-	/**
-	 * @param created the created to set
-	 */
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-	/**
-	 * @return the modified
-	 */
-	public Date getModified() {
-		return modified;
-	}
-	/**
-	 * @param modified the modified to set
-	 */
-	public void setModified(Date modified) {
-		this.modified = modified;
-	}
-	/**
-	 * @return the lastLogin
-	 */
-	public Date getLastLogin() {
-		return lastLogin;
-	}
-	/**
-	 * @param lastLogin the lastLogin to set
-	 */
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
-	/**
-	 * @return the token
-	 */
-	public String getToken() {
-		return token;
-	}
-	/**
-	 * @param token the token to set
-	 */
-	public void setToken(String token) {
-		this.token = token;
-	}
-	/**
-	 * @return the telefonos
-	 */
-	public List<TelefonoDTO> getTelefonos() {
-		return telefonos;
-	}
-	/**
-	 * @param telefonos the telefonos to set
-	 */
-	public void setTelefonos(List<TelefonoDTO> telefonos) {
-		this.telefonos = telefonos;
+	public void setPhones(List<TelefonoDTO> phones) {
+		this.phones = phones;
 	}
 }
