@@ -10,7 +10,7 @@ package co.com.crudSec.dto;
 public class TelefonoDTO {
     private String number;
     private String citycode;
-    private String countrycode;
+    private String contrycode;
     
 	/**
 	 * @return the number
@@ -39,13 +39,13 @@ public class TelefonoDTO {
 	/**
 	 * @return the countrycode
 	 */
-	public String getCountrycode() {
-		return countrycode;
+	public String getContrycode() {
+		return contrycode;
 	}
 	/**
 	 * @param countrycode the countrycode to set
 	 */
-	public void setCountrycode(String countrycode) {
-		this.countrycode = countrycode;
+	public void setContrycode(String contrycode) {
+		this.contrycode = contrycode;
 	}
 }

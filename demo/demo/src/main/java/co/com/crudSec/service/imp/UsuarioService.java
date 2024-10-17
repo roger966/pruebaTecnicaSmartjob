@@ -168,7 +168,7 @@ public class UsuarioService implements IUsuarioService{
 	            Telefono telefono = new Telefono();
 	            telefono.setNumber(telefonoDTO.getNumber().trim());
 	            telefono.setCitycode(telefonoDTO.getCitycode().trim());
-	            telefono.setCountrycode(telefonoDTO.getCountrycode().trim());
+	            telefono.setContrycode(telefonoDTO.getContrycode().trim());
 	            telefonos.add(telefono);
 	        }
 	    }
@@ -257,7 +257,7 @@ public class UsuarioService implements IUsuarioService{
 	            Telefono telefono = new Telefono();
 	            telefono.setNumber(telefonoDTO.getNumber().trim());
 	            telefono.setCitycode(telefonoDTO.getCitycode().trim());
-	            telefono.setCountrycode(telefonoDTO.getCountrycode().trim());
+	            telefono.setContrycode(telefonoDTO.getContrycode().trim());
 	            telefonos.add(telefono);
 	        }
 	    }

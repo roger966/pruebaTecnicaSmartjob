@@ -28,7 +28,7 @@ public class Telefono {
     private Long id;
     private String number;
     private String citycode;
-    private String countrycode;
+    private String contrycode;
 	public Long getId() {
 		return id;
 	}
@@ -47,10 +47,10 @@ public class Telefono {
 	public void setCitycode(String citycode) {
 		this.citycode = citycode;
 	}
-	public String getCountrycode() {
-		return countrycode;
+	public String getContrycode() {
+		return contrycode;
 	}
-	public void setCountrycode(String countrycode) {
-		this.countrycode = countrycode;
+	public void setContrycode(String contrycode) {
+		this.contrycode = contrycode;
 	} 
 }
