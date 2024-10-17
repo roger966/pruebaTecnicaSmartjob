@@ -8,24 +8,10 @@ package co.com.crudSec.dto;
  *
  */
 public class TelefonoDTO {
-	private Long id;
     private String number;
     private String citycode;
     private String countrycode;
     
-    
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 	/**
 	 * @return the number
 	 */

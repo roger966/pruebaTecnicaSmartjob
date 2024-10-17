@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 
+import co.com.crudSec.dto.RegistraUsuarioDTO;
 import co.com.crudSec.dto.UsuarioDTO;
 import co.com.crudSec.entity.Usuario;
 
@@ -22,7 +23,7 @@ public interface IUsuarioService {
 	 * <b>Descripción:</b> Método que contiene lógica necesaria para realizar el llamado a su debido proceso de registrar usuario
 	 * @param usuario corresponde a los datos de usuario necesarios para el registro
 	 */
-	public ResponseEntity<String> registrarUsuario(UsuarioDTO usuario);
+	public ResponseEntity<String> registrarUsuario(RegistraUsuarioDTO usuario);
 	
 	/**
 	 * <b>Descripción:</b> Método que contiene lógica necesaria para realizar el llamado a su debido proceso de modificar usuario

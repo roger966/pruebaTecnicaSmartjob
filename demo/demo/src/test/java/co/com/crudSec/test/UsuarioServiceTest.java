@@ -22,6 +22,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import co.com.crudSec.dto.RegistraUsuarioDTO;
 import co.com.crudSec.dto.UsuarioDTO;
 import co.com.crudSec.dto.enums.NivelContrasenaEnum;
 import co.com.crudSec.entity.NivelContrasena;
@@ -55,7 +56,7 @@ public class UsuarioServiceTest {
 	 */
 	@Test
 	public void testFallidoPorFaltaDeDatos() {
-		UsuarioDTO usuario = new UsuarioDTO();
+		RegistraUsuarioDTO usuario = new RegistraUsuarioDTO();
 		usuario.setName("");
 		ResponseEntity<String> exception = usuarioService.registrarUsuario(usuario);
         usuarioService.registrarUsuario(usuario);
@@ -69,7 +70,7 @@ public class UsuarioServiceTest {
 	 */
 	@Test
 	public void testGuardar() {
-		UsuarioDTO usuario = new UsuarioDTO();
+		RegistraUsuarioDTO usuario = new RegistraUsuarioDTO();
 		usuario.setName("Roger");
 		usuario.setEmail("roger@gmail.com");
 		usuario.setPassword("1Qp#");
@@ -96,7 +97,7 @@ public class UsuarioServiceTest {
 	 */
 	@Test
 	public void testFallidoPorMail() {
-		UsuarioDTO usuario = new UsuarioDTO();
+		RegistraUsuarioDTO usuario = new RegistraUsuarioDTO();
 		usuario.setName("Juan");
 		usuario.setEmail("juanjuan.com");
 		usuario.setPassword("456asX*");

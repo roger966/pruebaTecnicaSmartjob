@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import co.com.crudSec.dto.RegistraUsuarioDTO;
 import co.com.crudSec.dto.TelefonoDTO;
 import co.com.crudSec.dto.UsuarioDTO;
 import co.com.crudSec.dto.enums.NivelContrasenaEnum;
@@ -51,7 +52,7 @@ public class UsuarioService implements IUsuarioService{
      * @author roger
      *
      */
-    public ResponseEntity<String> registrarUsuario(UsuarioDTO usuario) {
+    public ResponseEntity<String> registrarUsuario(RegistraUsuarioDTO usuario) {
     	if(usuario.getName().isEmpty() || usuario.getEmail().isEmpty() || usuario.getPassword().isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"No es posible registrar por falta de datos\"}");
@@ -66,12 +67,12 @@ public class UsuarioService implements IUsuarioService{
 		}
 		Optional<Usuario> usuarioCorreo = usuarioRepository.findByEmail(usuario.getEmail());
 		
-		if(!usuarioCorreo.isEmpty() && usuarioCorreo.get().getId()!= usuario.getId()) {
+		if(!usuarioCorreo.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"mensaje\": \"El correo ya se encuentra registrado\"}");
 		}
 		
-		Usuario usuarioEntidad=convertirDtoEntidad(usuario);
+		Usuario usuarioEntidad=convertirDtoEntidadRegistro(usuario);
 		usuarioEntidad.setCreated(new Date());
 		usuarioEntidad.setModified(new Date());
 		usuarioEntidad.setPassword(PasswordUtil.encodePassword(usuario.getPassword()));
@@ -237,4 +238,30 @@ public class UsuarioService implements IUsuarioService{
 		return password_REGEX;
 	} 
 	
+	/**
+     * <b>Descripción:</b> Método encargado de convertir dto a entidad para realizar el registro
+     * @author roger
+     *
+     */
+	private Usuario convertirDtoEntidadRegistro(RegistraUsuarioDTO usuario) {
+		Usuario usuarioEntidad = new Usuario();
+		List<Telefono> telefonos = new ArrayList<>();
+		usuarioEntidad.setName(usuario.getName().trim());
+		usuarioEntidad.setEmail(usuario.getEmail().trim());
+		usuarioEntidad.setPassword(usuario.getPassword());
+		usuarioEntidad.setLastLogin(new Date());
+		usuarioEntidad.setToken(UUID.randomUUID().toString()); 
+		usuarioEntidad.setActive(true);
+	    if (usuario.getPhones() != null) {
+	        for (TelefonoDTO telefonoDTO : usuario.getPhones()) {
+	            Telefono telefono = new Telefono();
+	            telefono.setNumber(telefonoDTO.getNumber().trim());
+	            telefono.setCitycode(telefonoDTO.getCitycode().trim());
+	            telefono.setCountrycode(telefonoDTO.getCountrycode().trim());
+	            telefonos.add(telefono);
+	        }
+	    }
+		usuarioEntidad.setPhones(telefonos);
+		return usuarioEntidad;
+	}
 }

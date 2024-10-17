@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.crudSec.dto.RegistraUsuarioDTO;
 import co.com.crudSec.dto.UsuarioDTO;
 import co.com.crudSec.entity.Usuario;
 import co.com.crudSec.service.i.IUsuarioService;
@@ -37,7 +38,7 @@ public class UsuarioController {
 	 *
 	 */
 	@PostMapping("/registro")
-    public ResponseEntity<?> registrarUsuario(@RequestBody UsuarioDTO usuario) {
+    public ResponseEntity<?> registrarUsuario(@RequestBody RegistraUsuarioDTO usuario) {
 		return iUsuarioService.registrarUsuario(usuario);
     }
 	
