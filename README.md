@@ -21,32 +21,26 @@ la cual es de tipo post y sus datos de entrada corresponden a un json de cierta 
     ]
 }
 
-
 después el api retornará algún mensaje correspondiente a creación o posible error contemplado.
 
 si se quiere realizar alguna modificación al usuario registrado, el api cuenta con una url para ello la cual es:
 http://localhost:8080/usuarios/modifica
 este también es de tipo post
 este recibe todos los cambios requeridos que se necesiten modificar al usuario previamente registrado
+
 {
-        "id": "d81c4308-9a1e-4973-bc0d-d1fbb866e43d",
-        "nombre": "Juan felipe1",
-        "correo": "juanFelipe1@gmail.com",
-        "contrasena": "qaEf",
-        "created": "2024-10-07T17:29:03.317+00:00",
-        "modified": "2024-10-07T17:29:03.317+00:00",
-        "lastLogin": "2024-10-07T17:29:03.317+00:00",
-        "token": "c0872bf7-a11e-4801-b17c-a4bdf8cfdb06",
-        "telefonos": [
-            {
-                "id": 1,
-                "number": "1234567",
-                "citycode": "1",
-                "countrycode": "57"
-            }
-        ],
-        "active": true
-    }
+    "id": "d81c4308-9a1e-4973-bc0d-d1fbb866e43d",
+    "name": "Juan felipe1",
+    "email": "juanFelipe1@gmail.com",
+    "password": "aI1#",
+    "phones": [
+        {
+        "number": "1234567",
+        "citycode": "1",
+        "countrycode": "57"
+        }
+    ]
+}
 
 
 también se cuenta con la acción de consultar todos los usuarios registrados, accediendo a la siguiente ruta:
