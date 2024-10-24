@@ -4,34 +4,34 @@ Después de clonar y desplegar el repositorio
 
 Se tiene una url para registrar un usuario bajo los parámetros establecidos en la documentación recibida por SmartJob.
 
-ejemplo para registrar un usuario
+Ejemplo para registrar un usuario
 acceder a la siguiente url: http://localhost:8080/usuarios/registro  
 la cual es de tipo post y sus datos de entrada corresponden a un json de cierta estructura:
 
 {
-    "nombre": "Juan Pepe",
-    "correo": "juanPP@gmail.com",
-    "contrasena": "aI1#",
-    "telefonos": [
+    "name": "Juan Pepe",
+    "email": "juanPP@gmail.com",
+    "password": "aI1#",
+    "phones": [
     {
     "number": "1234567",
     "citycode": "1",
-    "countrycode": "57"
+    "contrycode": "57"
     }
     ]
 }
 
 después el api retornará algún mensaje correspondiente a creación o posible error contemplado.
 
-si se quiere realizar alguna modificación al usuario registrado, el api cuenta con una url para ello la cual es:
+Si se quiere realizar alguna modificación al usuario registrado, el api cuenta con una url para ello la cual es:
 http://localhost:8080/usuarios/modifica
 este también es de tipo post
 este recibe todos los cambios requeridos que se necesiten modificar al usuario previamente registrado
 
 {
     "id": "d81c4308-9a1e-4973-bc0d-d1fbb866e43d",
-    "name": "Juan felipe1",
-    "email": "juanFelipe1@gmail.com",
+    "name": "Juan Pepe1",
+    "email": "juanPP@gmail.com,
     "password": "aI1#",
     "phones": [
         {
@@ -43,11 +43,11 @@ este recibe todos los cambios requeridos que se necesiten modificar al usuario p
 }
 
 
-también se cuenta con la acción de consultar todos los usuarios registrados, accediendo a la siguiente ruta:
+También se cuenta con la acción de consultar todos los usuarios registrados, accediendo a la siguiente ruta:
 http://localhost:8080/usuarios/consulta 
 este es de tipo get
 
-también permite eliminar un usuario registrado, este se eliminará brindando su id
+También permite eliminar un usuario registrado, este se eliminará brindando su id
 accediendo a la siguiente ruta:
 http://localhost:8080/usuarios/elimina/d81c4308-9a1e-4973-bc0d-d1fbb866e43d
 este es de tipo delete
